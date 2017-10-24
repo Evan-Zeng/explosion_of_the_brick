@@ -207,7 +207,7 @@ function imgIsCollide(img_move, img_any)
 	if((IMG_SHAPE_CIRCLE === img_move.imgShape && IMG_SHAPE_RECT === img_any.imgShape) ||
 		(IMG_SHAPE_RECT === img_move.imgShape && IMG_SHAPE_CIRCLE === img_any.imgShape))
 	{
-		//只至判断是否相撞，但是不判断撞到哪了。。。
+		//只至判断是否相撞，但是不判断撞到哪了
 		return isCircleRectCollide(img_move, img_any);
 	}
 

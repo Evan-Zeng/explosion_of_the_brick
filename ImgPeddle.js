@@ -22,6 +22,32 @@ ImgPeddle.prototype.setImg = function (imgPath)
 }
 ImgPeddle.prototype.constructor = ImgPeddle;
 
+ImgPeddle.prototype.leftKeyDown = function ()
+{
+	if (this.speed.x === 0)
+	{
+		this.speed.x = 2;
+	}
+	this.speed.x = -Math.abs(this.speed.x);
+	
+}
+ImgPeddle.prototype.rightKeyDown = function ()
+{
+	if (this.speed.x === 0)
+	{
+		this.speed.x = 2;
+	}
+	this.speed.x = Math.abs(this.speed.x);
+	
+}
+ImgPeddle.prototype.upKeyDown = function ()
+{
+	console.log("peddle get up key down");
+}
+ImgPeddle.prototype.downKeyDown = function ()
+{
+	console.log("peddle get down key down");
+}
 /*
 	注册 感知 左移，右移事件
 */

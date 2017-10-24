@@ -23,7 +23,6 @@ function Game()
     
     this.gameImagesArray = [];
     this.gameMoveImagesArray = [];
-    this.gameDirectEventImgArray = []; //二维数组 UP DOWN LEFT RIGHT.
     this.gameStartFlag = false;
 
 	//update 函数
@@ -72,24 +71,10 @@ function Game()
     	if ((img.position.x < 0) || (img.position.x > (300 - img.imgObj.width)))
     	{
     		// 恢复
-    		if (img.imgType == IMG_TYPE_PEDDLE)
-    		{
-    			if (img.position.x < 0)
-    			{
-    				img.position.x = 0;
-    			}
-    			else
-    			{
-    				img.position.x = 300 - img.imgObj.width;
-    			}
-    		}
-    		else
-    		{
-    			img.position.x -= img.speed.x;
-    			img.speed.x = -img.speed.x;
-    			img.position.x += img.speed.x;
-    			isCollide = true;
-    		}
+    		img.position.x -= img.speed.x;
+    		img.speed.x = -img.speed.x;
+    		img.position.x += img.speed.x;
+    		isCollide = true;
     	}
 
     	if ((img.position.y < 0) || (img.position.y > (200 - img.imgObj.height / 2)))
@@ -152,31 +137,6 @@ function Game()
 		console.log('add move img to game, img ' + img);
 	};
 
-	this.registerMoveEvent = function (img)
-	{
-		this.gameDirectEventImgArray.push(img);
-	}
-
-	this.moveEventLeftKey = function ()
-	{
-		console.log("move left key down");
-		for (var idx in this.gameDirectEventImgArray)
-		{
-			var tempImg = this.gameDirectEventImgArray[idx];
-			tempImg.leftKeyDown();
-		}
-	}
-
-	this.moveEventRightKey = function ()
-	{
-		console.log("move right key down");
-		for (var idx in this.gameDirectEventImgArray)
-		{
-			var tempImg = this.gameDirectEventImgArray[idx];
-			tempImg.rightKeyDown();
-		}
-	}
-
 	this.gameInit();
 	setInterval(this.updateGame.bind(this), 1000/30);   //挖槽，这个this，是window
 
@@ -205,7 +165,7 @@ function isCircleRectCollide(img_one, img_two)
 
 	//不用转换象限，都在第一象限
 	var vec_rect_pos = new Vector2(rect.position.x, rect.position.y);
-	var vec_ball_pos = new Vector2(ball.position.x + ballRadius, ball.position.y + ballRadius);
+	var vec_ball_pos = new Vector2(ball.position.x + ballRadius / 2, ball.position.y + ballRadius / 2);
 
 	var v = vec_ball_pos.substract(vec_rect_pos);
 	v.x = Math.abs(v.x);
@@ -253,7 +213,6 @@ function __main()
 	
 	game.addImgToGame(img);
 	game.addMoveImgToGame(img);
-	game.registerMoveEvent(img);
 	
 	document.onkeydown = function (event){
 		if (event.keyCode == 13)
@@ -266,11 +225,18 @@ function __main()
 		}
 		if (event.keyCode == 37)
 		{
-			game.moveEventLeftKey();
+			console.log('key down left'); 
+			if (img.position.x >= 3){
+				img.position.x -= 3;
+			}
+
 		}
 		if (event.keyCode == 39)
 		{
-			game.moveEventRightKey();
+			console.log('key down right'); 
+			if (img.position.x <= 280){
+				img.position.x += 3;
+			}
 		}
 	};
 	game.startGame();

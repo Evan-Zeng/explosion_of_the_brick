@@ -2,8 +2,53 @@
 <html>
 <head>
 	<title>Map Editor v0.1</title>
+	<style type="text/css">
+		#div_editor
+		{
+			width: 1644px;  /*这个有没有办法不要写死*/
+			margin: 0 auto;
+			font-size: 0; /*2个inline-block的子div可以并在一起没有缝隙*/
+		}	
+
+		/*
+		    http://www.zhangxinxu.com/wordpress/2015/08/css-deep-understand-vertical-align-and-line-height/
+			解决两个inline-block不对对齐的问题（加了两个vertical-align:top;）
+		*/
+		#div_ctl_board
+		{
+			width:  320px;
+			height: 600px;
+			border: 1px solid black;
+			display: inline-block;
+			vertical-align:top;
+		}
+		
+		#div_game_map
+		{
+			width: 1320px;
+			height: 600px;
+			border: 1px solid black;
+			margin: 0;
+			display: inline-block;
+			font-size: 0; /*让图片能够和上边缘重合*/
+			vertical-align:top;
+		}
+	</style>
 </head>
 <body>
+		<div id="div_editor">
+			<div id="div_game_map">
+			</div>
+			<div id="div_ctl_board">
+				<!--除非是在head里直接用script标签定义，否则用 script src="xx"的形式，很可能会找不到定义 不管这个语句放head里还是body最后-->
+				<select id="select_brick" onchange="selectBricks(this)"> 
+					<option value="zc">fff</option>
+					<option value="zc1">ddd</option>
+				</select>	
+			</div>
+			
+		</div>
 	<script type="text/javascript" src="mapeditor.js"></script>
+
 </body>
 </html>

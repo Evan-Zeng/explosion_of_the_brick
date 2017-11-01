@@ -37,9 +37,20 @@ function CreateChildrenDiv()
 		{
 			var img = document.createElement("img");
 			img.src = "default_brick.png";
+
+			img.onmouseover = function()
+			{
+				this.src = "normal_brick4_transparent.png";
+			}
+
+			img.onmouseout = function()
+			{
+				this.src = "default_brick.png";
+			}
+
 			subDiv.appendChild(img);
 		}
-
+		
 		gamemap.appendChild(subDiv);
 	}
 }

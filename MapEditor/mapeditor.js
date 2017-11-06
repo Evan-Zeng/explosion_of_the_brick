@@ -5,7 +5,7 @@ var DEFAULT_BRICK_ID = 0;
 var NORMAL_BRICK_ID  = 1;
 
 var g_brick_array = [
-	["default_brick.png", ""],
+	["default_brick.png", "default_brick.png"],
 	["normal_brick4.png", "normal_brick4_transparent.png"]
 ];
 
@@ -75,12 +75,13 @@ function CreateChildrenDiv()
 
 function Init()
 {
-	selectElement = document.getElementById("select_brick");
+	var selectElement = document.getElementById("select_brick");
+	g_select_choice = Number(selectElement.value);
 	selectElement.onchange = function ()
 	{
-		alert("asdf");
-		var value = Number(this.value);
+		g_select_choice = Number(this.value);
 	}
 }
 
+Init();
 CreateChildrenDiv();

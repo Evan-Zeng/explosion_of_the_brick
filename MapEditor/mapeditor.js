@@ -1,10 +1,22 @@
+/*
+
+*/
+var DEFAULT_BRICK_ID = 0;
+var NORMAL_BRICK_ID  = 1;
+
+var g_brick_array = [
+	["default_brick.png", ""],
+	["normal_brick4.png", "normal_brick4_transparent.png"]
+];
+
+var g_select_choice = 1;
+
 /*首先创建一个png*/
 
 var gamemap = document.getElementById('div_game_map');
 var subDivWidth = 1320;
 var subDivHeight = 20;
 var subDivNum = 20;
-
 var bricksWidth = 60;
 
 /*
@@ -37,27 +49,38 @@ function CreateChildrenDiv()
 		{
 			var img = document.createElement("img");
 			img.src = "default_brick.png";
+			img.currentImg = "default_brick.png";
 
 			img.onmouseover = function()
 			{
-				this.src = "normal_brick4_transparent.png";
+				this.src = g_brick_array[g_select_choice][1];
 			}
 
 			img.onmouseout = function()
 			{
-				this.src = "default_brick.png";
+				this.src = this.currentImg;
+			}
+
+			img.onclick = function()
+			{
+				this.currentImg = g_brick_array[g_select_choice][0];
 			}
 
 			subDiv.appendChild(img);
 		}
-		
+
 		gamemap.appendChild(subDiv);
 	}
 }
 
 function Init()
 {
-	var selectElement = document.getElementById("select_brick");
+	selectElement = document.getElementById("select_brick");
+	selectElement.onchange = function ()
+	{
+		alert("asdf");
+		var value = Number(this.value);
+	}
 }
 
 CreateChildrenDiv();

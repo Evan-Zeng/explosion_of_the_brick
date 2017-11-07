@@ -4,6 +4,9 @@
 var DEFAULT_BRICK_ID = 0;
 var NORMAL_BRICK_ID  = 1;
 
+var NORMAL_IMG = 0;
+var TRANSPARENT_IMG = 1;
+
 var g_brick_array = [
 	["default_brick.png", "default_brick.png"],
 	["normal_brick4.png", "normal_brick4_transparent.png"]
@@ -48,12 +51,12 @@ function CreateChildrenDiv()
 		for (var imgIdx = 0; imgIdx < bricks_per_row; imgIdx++)
 		{
 			var img = document.createElement("img");
-			img.src = "default_brick.png";
-			img.currentImg = "default_brick.png";
+			img.src = g_brick_array[DEFAULT_BRICK_ID][NORMAL_IMG];
+			img.currentImg = g_brick_array[DEFAULT_BRICK_ID][NORMAL_IMG];
 
 			img.onmouseover = function()
 			{
-				this.src = g_brick_array[g_select_choice][1];
+				this.src = g_brick_array[g_select_choice][TRANSPARENT_IMG];
 			}
 
 			img.onmouseout = function()
@@ -63,7 +66,7 @@ function CreateChildrenDiv()
 
 			img.onclick = function()
 			{
-				this.currentImg = g_brick_array[g_select_choice][0];
+				this.currentImg = g_brick_array[g_select_choice][NORMAL_IMG];
 			}
 
 			subDiv.appendChild(img);
@@ -77,10 +80,26 @@ function Init()
 {
 	var selectElement = document.getElementById("select_brick");
 	g_select_choice = Number(selectElement.value);
-	selectElement.onchange = function ()
+	selectElement.onchange = function ()  //也可以用addEventListener实现
 	{
 		g_select_choice = Number(this.value);
 	}
+
+	var btnResetMap = document.getElementById("btn_resetmap");
+	btn_resetmap.onclick = function ()
+	{
+		for(var i = 0; i < subDivNum; i++)
+		{
+			var subDivName = "subDiv_" + i.toString();
+			var subDiv = document.getElementById(subDivName);
+			var tempImgs = subDiv.getElementsByTagName("img");
+			for (var n = 0; n < tempImgs.length; n++)
+			{
+				var tempImg = tempImgs[n];
+				tempImg.src = g_brick_array[DEFAULT_BRICK_ID][NORMAL_IMG];
+			}
+		}
+	};
 }
 
 Init();

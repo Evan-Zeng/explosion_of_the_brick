@@ -46,6 +46,17 @@
 					<option value="1">normal brick</option>
 				</select>
 				<button id="btn_resetmap">reset</button>
+				<!--如何让server知道本地的数组信息-->
+				<form action="mapserver.php" method="post">
+					<input id="image-file" type="file" />
+					<select id="select_brick"> 
+						<option value="0">stage_1</option>
+						<option value="1">stage_2</option>
+					</select>
+					<input type="submit" value="save" />
+				</form>
+
+				<!--可以从服务器获取任意一个关卡的地图-->
 			</div>
 			
 		</div>

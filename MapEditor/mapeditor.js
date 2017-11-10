@@ -100,6 +100,15 @@ function Init()
 			}
 		}
 	};
+
+	var btn_save = document.getElementById("input_save_map");
+	btn_save.onclick = function()
+	{
+		//traverse the img, get the two-dimensional array value
+		//post to the server
+			//server save to the database.
+		//get the response
+	}
 }
 
 Init();

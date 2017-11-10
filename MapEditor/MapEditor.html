@@ -47,14 +47,14 @@
 				</select>
 				<button id="btn_resetmap">reset</button>
 				<!--如何让server知道本地的数组信息-->
-				<form action="mapserver.php" method="post">
+				<div>
 					<input id="image-file" type="file" />
-					<select id="select_brick"> 
+					<select id="select_stage"> 
 						<option value="0">stage_1</option>
 						<option value="1">stage_2</option>
 					</select>
-					<input type="submit" value="save" />
-				</form>
+					<button type="submit" value="save" id="input_save_map">save map</button>
+				</div>
 
 				<!--可以从服务器获取任意一个关卡的地图-->
 			</div>

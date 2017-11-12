@@ -16,11 +16,16 @@ var g_select_choice = 1;
 
 /*首先创建一个png*/
 
+g_valueOfImg = { "default_brick.png" : 0, "normal_brick4.png" : 1};
+
 var gamemap = document.getElementById('div_game_map');
 var subDivWidth = 1320;
 var subDivHeight = 20;
-var subDivNum = 20;
 var bricksWidth = 60;
+var subDivNum = 20;
+
+var bricks_per_row = subDivWidth / bricksWidth;
+var rows_of_bricks = subDivNum;
 
 /*
 	创建一个全局的div
@@ -37,7 +42,6 @@ var bricksWidth = 60;
 function CreateChildrenDiv()
 {
 	var position = { x: 0, y: 0 };
-	var bricks_per_row = subDivWidth / bricksWidth;
 	for (var idx = 0; idx < subDivNum; idx++)
 	{
 		position.y = idx * subDivHeight;
@@ -76,6 +80,21 @@ function CreateChildrenDiv()
 	}
 }
 
+function traverseTheImg(doSth)
+{
+	for(var i = 0; i < subDivNum; i++)
+		{
+			var subDivName = "subDiv_" + i.toString();
+			var subDiv = document.getElementById(subDivName);
+			var tempImgs = subDiv.getElementsByTagName("img");
+			for (var n = 0; n < tempImgs.length; n++)
+			{
+				var tempImg = tempImgs[n];
+				doSth(tempImg);
+			}
+		}
+}
+
 function Init()
 {
 	var selectElement = document.getElementById("select_brick");
@@ -88,23 +107,24 @@ function Init()
 	var btnResetMap = document.getElementById("btn_resetmap");
 	btn_resetmap.onclick = function ()
 	{
-		for(var i = 0; i < subDivNum; i++)
-		{
-			var subDivName = "subDiv_" + i.toString();
-			var subDiv = document.getElementById(subDivName);
-			var tempImgs = subDiv.getElementsByTagName("img");
-			for (var n = 0; n < tempImgs.length; n++)
-			{
-				var tempImg = tempImgs[n];
-				tempImg.src = g_brick_array[DEFAULT_BRICK_ID][NORMAL_IMG];
-			}
-		}
+		traverseTheImg(function (img){
+			img.src = g_brick_array[DEFAULT_BRICK_ID][NORMAL_IMG];
+		});
 	};
 
 	var btn_save = document.getElementById("input_save_map");
 	btn_save.onclick = function()
 	{
+		var savearray = [];
+		var idx = 0;
+
 		//traverse the img, get the two-dimensional array value
+		traverseTheImg(function (img){
+			var filename=img.src.substring(img.src.lastIndexOf("/")+1,img.src.length);
+			savearray[idx++] = g_valueOfImg[filename];
+			console.log(savearray[idx - 1]);
+		});
+		
 		//post to the server
 			//server save to the database.
 		//get the response

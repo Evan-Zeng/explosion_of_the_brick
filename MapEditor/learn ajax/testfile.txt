@@ -1,0 +1,99 @@
+
+0:data={"data":[[1,2,332233],[2,3,4]]}
+1:aaadsfd
+2:0.49856609289752596
+4:post data ={"data":[[1,2,332233],[2,3,4]]}!!!zczc
+5:post data[0] ={!!!zczc
+5:post data[1] ="!!!zczc
+5:post data[2] =d!!!zczc
+
+0:data={"data":[[1,2,332233],[2,3,4]]}
+1:aaadsfd
+2:0.3756658174259214
+4:post data ={"data":[[1,2,332233],[2,3,4]]}!!!zczc
+
+0:data={"data":[[1,2,332233],[2,3,4]]}
+1:aaadsfd
+2:0.03790858341160286
+4:post data ={"data":[[1,2,332233],[2,3,4]]}!!!zczc
+5:post nnn[0] =Array!!!zczc
+
+0:data={"data":[[1,2,332233],[2,3,4]]}
+1:aaadsfd
+2:0.42595889500676887
+4:post data ={"data":[[1,2,332233],[2,3,4]]}!!!zczc
+5:post nnn[0] =Array!!!zczc
+5:post nnn[1] =Array!!!zczc
+5:post nnn[2] =Array!!!zczc
+
+0:data={"data":[[1,2,332233],[2,3,4]]}
+1:aaadsfd
+2:0.8247271333335966
+4:data from xx is :{"data":[[1,2,332233],[2,3,4]]}!!!zczc
+5:post nnn[0] =Array!!!zczc
+5:post nnn[1] =Array!!!zczc
+5:post nnn[2] =Array!!!zczc
+
+0:
+1:aaadsfd
+2:0.213
+4:data from xx is :!!!zczc
+5:post nnn[0] =!!!zczc
+5:post nnn[1] =!!!zczc
+5:post nnn[2] =!!!zczc
+
+0:
+1:aaadsfd
+2:0.213
+4:data from xx is :!!!zczc
+5:post nnn[0] =!!!zczc
+5:post nnn[1] =!!!zczc
+5:post nnn[2] =!!!zczc
+
+0:data={"data":[[1,2,332233],[2,3,4]]}
+1:aaadsfd
+2:0.10586451138763764
+4:data from xx is :{"data":[[1,2,332233],[2,3,4]]}!!!zczc
+5:post nnn[0] =Array!!!zczc
+5:post nnn[1] =Array!!!zczc
+5:post nnn[2] =Array!!!zczc
+6:var dump is :!!!zczc
+
+0:data={"data":[[1,2,332233],[2,3,4]]}
+1:aaadsfd
+2:0.854635187739352
+4:data from xx is :{"data":[[1,2,332233],[2,3,4]]}!!!zczc
+5:post nnn[0] =Array!!!zczc
+5:post nnn[1] =Array!!!zczc
+5:post nnn[2] =Array!!!zczc
+
+0:data={"data":[[1,2,332233],[2,3,4]]}
+1:aaadsfd
+2:0.7469516013287574
+4:data from xx is :{"data":[[1,2,332233],[2,3,4]]}!!!zczc
+5:post nnn =Array!!!zczc
+5:post nnn[0] =Array!!!zczc
+5:post nnn[1] =Array!!!zczc
+5:post nnn[2] =!!!zczc
+
+0:data={"data":[[1,2,332233],[2,3,4]]}
+1:aaadsfd
+2:0.14485414915878436
+4:data from xx is :{"data":[[1,2,332233],[2,3,4]]}!!!zczc
+5:post nnn =Array!!!zczc
+5:post nnn[0] =1!!!zczc
+5:post nnn[1] =2!!!zczc
+5:post nnn[2] =!!!zczc
+
+0:data={"data":[[1,2,332233],[2,3,4]]}
+1:aaadsfd
+2:0.45818733453172455
+4:data from xx is :{"data":[[1,2,332233],[2,3,4]]}!!!zczc
+5:post nnn =Array!!!zczc
+5:post nnn[0] =332233!!!zczc
+5:post nnn[1] =2!!!zczc
+5:post nnn[2] =!!!zczc
+
+0:data=[[1,2,332233],[2,3,4]]
+4:data from xx is :[[1,2,332233],[2,3,4]]!!!zczc
+5:post nnn[0][2] =332233!!!zczc

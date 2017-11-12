@@ -95,6 +95,36 @@ function traverseTheImg(doSth)
 		}
 }
 
+function PostAndSaveMapToServer(mapArray)
+{
+	if(window.XMLHttpRequest)
+	{
+		var saveMapReq = new XMLHttpRequest();
+		saveMapReq.onreadystatechange = function ()
+		{
+			//"Ok, you save the map successfully." 并且圆圈成了一个勾勾.png
+			//提示和勾勾.png 在下一次点击save按钮或者换地图的时候会消失
+			//在等待响应的时候save旁边有一个圆圈在转
+			if(saveMapReq.readyState == 200 && saveMapReq.status == 4)
+			{
+
+			}
+		}
+
+		var postData = "data=" + JSON.stringify(mapArray);
+		console.log("The post Data is :" + postData);
+
+		saveMapReq.open("POST", "mapserver.php?t=" + Math.random(), true); //true 就是异步的
+		saveMapReq.setRequestHeader("cache-control","no-cache");
+		saveMapReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		saveMapReq.send(postData);
+	}
+	else
+	{
+		alert("Sorry, your browser is not support ajax.");
+	}
+}
+
 function Init()
 {
 	var selectElement = document.getElementById("select_brick");
@@ -126,6 +156,7 @@ function Init()
 		});
 		
 		//post to the server
+		PostAndSaveMapToServer(savearray);
 			//server save to the database.
 		//get the response
 	}

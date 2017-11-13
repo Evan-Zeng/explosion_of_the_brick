@@ -116,8 +116,8 @@ function PostAndSaveMapToServer(mapName, mapWidth, mapHeight, mapArray)
 		var strMapWidth = "MapWidth=" + mapWidth.toString();
 		var strMapHeight = "MapHeight=" + mapHeight.toString();
 		var postData = "data=" + JSON.stringify(mapArray);
-
-		var postData = mapName + "&" + strMapHeight + "&" + strMapWidth + "&" + postData;
+		var operation = "operation=save"; 
+		var postData = mapName + "&" + strMapHeight + "&" + strMapWidth + "&" + postData + "&" + operation;
 
 		console.log("The post Data is :" + postData);
 

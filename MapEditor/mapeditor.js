@@ -95,7 +95,7 @@ function traverseTheImg(doSth)
 		}
 }
 
-function PostAndSaveMapToServer(mapArray)
+function PostAndSaveMapToServer(mapName, mapWidth, mapHeight, mapArray)
 {
 	if(window.XMLHttpRequest)
 	{
@@ -111,7 +111,14 @@ function PostAndSaveMapToServer(mapArray)
 			}
 		}
 
+		//
+		var mapName = "MapName=" + mapName;
+		var strMapWidth = "MapWidth=" + mapWidth.toString();
+		var strMapHeight = "MapHeight=" + mapHeight.toString();
 		var postData = "data=" + JSON.stringify(mapArray);
+
+		var postData = mapName + "&" + strMapHeight + "&" + strMapWidth + "&" + postData;
+
 		console.log("The post Data is :" + postData);
 
 		saveMapReq.open("POST", "mapserver.php?t=" + Math.random(), true); //true 就是异步的
@@ -154,11 +161,15 @@ function Init()
 			savearray[idx++] = g_valueOfImg[filename];
 			console.log(savearray[idx - 1]);
 		});
-		
+
+		//get the map name
+		var select_mapname = document.getElementById("select_stage");
+		var mapName = select_mapname.options[select_mapname.selectedIndex].text;
+
 		//post to the server
-		PostAndSaveMapToServer(savearray);
+		PostAndSaveMapToServer(mapName, bricks_per_row, rows_of_bricks, savearray);
 			//server save to the database.
-		//get the response
+		//get the response (在 PostAndSaveMapToServer 里面可以获取response)
 	}
 }
 

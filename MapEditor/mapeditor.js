@@ -105,9 +105,9 @@ function PostAndSaveMapToServer(mapName, mapWidth, mapHeight, mapArray)
 			//"Ok, you save the map successfully." 并且圆圈成了一个勾勾.png
 			//提示和勾勾.png 在下一次点击save按钮或者换地图的时候会消失
 			//在等待响应的时候save旁边有一个圆圈在转
-			if(saveMapReq.readyState == 200 && saveMapReq.status == 4)
+			if(saveMapReq.readyState == 4 && saveMapReq.status == 200)
 			{
-
+				console.log("The response msg is :" + saveMapReq.responseText);
 			}
 		}
 
@@ -168,8 +168,6 @@ function Init()
 
 		//post to the server
 		PostAndSaveMapToServer(mapName, bricks_per_row, rows_of_bricks, savearray);
-			//server save to the database.
-		//get the response (在 PostAndSaveMapToServer 里面可以获取response)
 	}
 }
 

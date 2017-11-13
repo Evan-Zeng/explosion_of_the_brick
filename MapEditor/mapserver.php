@@ -53,8 +53,26 @@
         return;
     }
 
+    //TODO: 把save封装成一个函数
     if ($oper === "save")
     {
+        $query = "SELECT * FROM brick_game_map_info WHERE MapName='$mapName'";
+        fwrite($logfile, "Query select from string is:" . $query . "\n");
+        $res = mysqli_query($sqlconn, $query);
+        if (mysqli_num_rows($res) > 0)
+        {
+            $query = "DELETE FROM brick_game_map_info WHERE MapName='$mapName'";
+            if (!mysqli_query($sqlconn, $query))
+            {
+                fwrite($logfile, "Delete the exist map failed.\n");
+                fclose($logfile);
+                mysqli_close($sqlconn);
+                return;
+            }
+
+            fwrite($logfile, "Delete the exist map succeed.\n");
+        }
+
         //save 语句
         $query = "INSERT INTO brick_game_map_info (MapName, Width, Height, MapData) VALUES ('$mapName', '$mapWidth', '$mapHeight', '$finalMapData')";
         fwrite($logfile, "Query string is:" . $query . "\n");
@@ -67,6 +85,8 @@
             return;
         }
         //response
+        echo "ok, save over";
+        echo "ok, save over2222";
         mysqli_close($sqlconn);
         fclose($logfile);
         return;

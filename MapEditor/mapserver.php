@@ -120,13 +120,13 @@
 
         $get_map_info_result=mysqli_fetch_array($res);
 
-        //组装信息，并且通过echo回给mapeditior
         fwrite($logfile, "Get map info from database.\n");
         fwrite($logfile, "mapname = " . $get_map_info_result['MapName'] . ".\n");
         fwrite($logfile, "Width = " . $get_map_info_result['Width'] . ".\n");
         fwrite($logfile, "Height = " . $get_map_info_result['Height'] . ".\n");
 
-        echo "Yes I received msg";
+        $responsetxt = "responsedata=" . $get_map_info_result['MapData'];
+        echo $responsetxt;
 
         mysqli_close($sqlconn);
         fclose($logfile);

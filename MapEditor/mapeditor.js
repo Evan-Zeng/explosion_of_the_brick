@@ -83,16 +83,16 @@ function CreateChildrenDiv()
 function traverseTheImg(doSth)
 {
 	for(var i = 0; i < subDivNum; i++)
+	{
+		var subDivName = "subDiv_" + i.toString();
+		var subDiv = document.getElementById(subDivName);
+		var tempImgs = subDiv.getElementsByTagName("img");
+		for (var n = 0; n < tempImgs.length; n++)
 		{
-			var subDivName = "subDiv_" + i.toString();
-			var subDiv = document.getElementById(subDivName);
-			var tempImgs = subDiv.getElementsByTagName("img");
-			for (var n = 0; n < tempImgs.length; n++)
-			{
-				var tempImg = tempImgs[n];
-				doSth(tempImg);
-			}
+			var tempImg = tempImgs[n];
+			doSth(tempImg);
 		}
+	}
 }
 
 function PostGetMapInfo (mapname) 
@@ -104,10 +104,16 @@ function PostGetMapInfo (mapname)
 		{
 			if (getmapinforeq.readyState == 4 && getmapinforeq.status == 200)
 			{
-				var mapinfo = getmapinforeq.responseText;
-				console.log("Map Info is:" + mapinfo);
-				return mapinfo;
-			}
+				var responsetxt = getmapinforeq.responseText;
+				var mapinfo = responsetxt.substring(responsetxt.indexOf("=") + 1);
+				console.log("Map Info is:" + mapinfo + "map info len is :" + mapinfo.length);
+				
+				//change img
+				var index = 0;
+				traverseTheImg(function(img){
+					img.src = g_brick_array[Number(mapinfo[index++])][NORMAL_IMG];
+				});
+			}	
 		}
 
 		//post mapname 到server
@@ -211,11 +217,7 @@ function Init()
 			return;
 		}
 		console.log("Button getmap clicked.");
-		var info = PostGetMapInfo(input_mapname.value);
-		if (info)
-		{
-			//解析数据，然后更新img，显示到屏幕上
-		}
+		PostGetMapInfo(input_mapname.value);
 	}
 }
 

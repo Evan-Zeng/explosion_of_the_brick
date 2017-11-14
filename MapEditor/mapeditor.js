@@ -95,6 +95,36 @@ function traverseTheImg(doSth)
 		}
 }
 
+function PostGetMapInfo (mapname) 
+{
+	if (window.XMLHttpRequest)
+	{
+		var getmapinforeq = new XMLHttpRequest();
+		getmapinforeq.onreadystatechange = function()
+		{
+			if (getmapinforeq.readyState == 4 && getmapinforeq.status == 200)
+			{
+				var mapinfo = getmapinforeq.responseText;
+				console.log("Map Info is:" + mapinfo);
+				return mapinfo;
+			}
+		}
+
+		//post mapname 到server
+		getmapinforeq.open("POST", "mapserver.php?t=" + Math.random(), true);
+		getmapinforeq.setRequestHeader("cache-control", "no-cache");
+		getmapinforeq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		var getstring = "MapName=" + mapname + "&operation=get";
+		console.log("Get map info string is:" + getstring);
+		getmapinforeq.send(getstring);
+	}
+	else
+	{
+		alert("Your browser does not support the ajax.");
+		return null;
+	}
+}
+
 function PostAndSaveMapToServer(mapName, mapWidth, mapHeight, mapArray)
 {
 	if(window.XMLHttpRequest)
@@ -168,6 +198,24 @@ function Init()
 
 		//post to the server
 		PostAndSaveMapToServer(mapName, bricks_per_row, rows_of_bricks, savearray);
+	}
+
+	var btn_getmap = document.getElementById("btn_getmap");
+	btn_getmap.onclick = function()
+	{
+		//判断text如果不为空
+		var input_mapname = document.getElementById("input_getmap");
+		if (!input_getmap.value)
+		{
+			alert("Map name can not be null!");
+			return;
+		}
+		console.log("Button getmap clicked.");
+		var info = PostGetMapInfo(input_mapname.value);
+		if (info)
+		{
+			//解析数据，然后更新img，显示到屏幕上
+		}
 	}
 }
 

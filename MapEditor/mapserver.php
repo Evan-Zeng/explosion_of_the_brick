@@ -16,28 +16,31 @@
     //获取地图的名字
     //获取地图长和宽
     //组装$data成一个字符串
-	$data = json_decode($_POST['data']);
-    $mapName = $_POST['MapName'];
-    $mapHeight = $_POST['MapHeight'];
-    $mapWidth = $_POST['MapWidth'];
-    $oper = $_POST['operation'];
-
+	
     $logfile = fopen("debug_log.txt", "a");
-    fwrite($logfile, "1. MapName is :" . $mapName . "\n");
-    fwrite($logfile, "2. MapHeight is :" . $mapHeight . "\n");
-    fwrite($logfile, "3. MapWidth is :" . $mapWidth . "\n");
-    fwrite($logfile, "4. Operation is :" . $oper . "\n");
-
-    $finalMapData = "";
-    for ($height = 0; $height < $mapHeight; $height++)
+    if (isset($_POST['MapName']))
     {
-        $one_row = "";
-        for ($width = 0; $width < $mapWidth; $width++)
-        {
-            $one_row = $one_row . $data[$height * $mapWidth + $width];
-        }
-        fwrite($logfile, $one_row . "\n");
-        $finalMapData = $finalMapData . $one_row;
+        $mapName = $_POST['MapName'];
+        fwrite($logfile, "1. MapName is :" . $mapName . "\n");
+    }
+    if (isset($_POST['MapHeight']))
+    {
+        $mapHeight = $_POST['MapHeight'];
+        fwrite($logfile, "2. MapHeight is :" . $mapHeight . "\n");
+    }
+    if (isset($_POST['MapWidth']))
+    {
+        $mapWidth = $_POST['MapWidth'];
+        fwrite($logfile, "3. MapWidth is :" . $mapWidth . "\n");
+    }
+    if (isset($_POST['operation']))
+    {
+        $oper = $_POST['operation'];
+        fwrite($logfile, "4. Operation is :" . $oper . "\n");
+    }
+    if (isset($_POST['data']))
+    {
+        $data = json_decode($_POST['data']);
     }
     
 
@@ -53,12 +56,14 @@
         return;
     }
 
+    $query = "SELECT * FROM brick_game_map_info WHERE MapName='$mapName'";
+    fwrite($logfile, "Query select from string is:" . $query . "\n");
+    $res = mysqli_query($sqlconn, $query);
+
     //TODO: 把save封装成一个函数
     if ($oper === "save")
     {
-        $query = "SELECT * FROM brick_game_map_info WHERE MapName='$mapName'";
-        fwrite($logfile, "Query select from string is:" . $query . "\n");
-        $res = mysqli_query($sqlconn, $query);
+        
         if (mysqli_num_rows($res) > 0)
         {
             $query = "DELETE FROM brick_game_map_info WHERE MapName='$mapName'";
@@ -71,6 +76,18 @@
             }
 
             fwrite($logfile, "Delete the exist map succeed.\n");
+        }
+
+        $finalMapData = "";
+        for ($height = 0; $height < $mapHeight; $height++)
+        {
+            $one_row = "";
+            for ($width = 0; $width < $mapWidth; $width++)
+            {
+                $one_row = $one_row . $data[$height * $mapWidth + $width];
+            }
+            fwrite($logfile, $one_row . "\n");
+            $finalMapData = $finalMapData . $one_row;
         }
 
         //save 语句
@@ -93,12 +110,31 @@
     }
     else if ($oper === "get")
     {
+        if (mysqli_num_rows($res) <= 0)
+        {
+            echo "result=-1";
+            mysqli_close($sqlconn);
+            fclose($logfile);
+            return;
+        }
+
+        $get_map_info_result=mysqli_fetch_array($res);
+
+        //组装信息，并且通过echo回给mapeditior
+        fwrite($logfile, "Get map info from database.\n");
+        fwrite($logfile, "mapname = " . $get_map_info_result['MapName'] . ".\n");
+        fwrite($logfile, "Width = " . $get_map_info_result['Width'] . ".\n");
+        fwrite($logfile, "Height = " . $get_map_info_result['Height'] . ".\n");
+
+        echo "Yes I received msg";
+
+        mysqli_close($sqlconn);
         fclose($logfile);
+        return;
     }
     else
     {
 
     }
-
     fclose($logfile);
 ?>

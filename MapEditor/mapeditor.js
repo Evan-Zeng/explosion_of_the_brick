@@ -107,7 +107,11 @@ function PostGetMapInfo (mapname)
 				var responsetxt = getmapinforeq.responseText;
 				var mapinfo = responsetxt.substring(responsetxt.indexOf("=") + 1);
 				console.log("Map Info is:" + mapinfo + "map info len is :" + mapinfo.length);
-				
+				if ("-1" === mapinfo)
+				{
+					alert("no map named :" + mapname);
+					return;
+				}
 				//change img
 				var index = 0;
 				traverseTheImg(function(img){

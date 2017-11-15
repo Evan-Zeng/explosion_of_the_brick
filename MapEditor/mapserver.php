@@ -98,6 +98,7 @@
         {
             fwrite($logfile, "mysql query save info failed.\n");
             fclose($logfile);
+            echo "错误描述: " . mysqli_error($sqlconn); 
             mysqli_close($sqlconn);
             return;
         }

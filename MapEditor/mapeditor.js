@@ -197,7 +197,7 @@ function Init()
 
 		//traverse the img, get the two-dimensional array value
 		traverseTheImg(function (img){
-			var filename=img.src.substring(img.src.lastIndexOf("/")+1,img.src.length);
+			var filename = img.src.substring(img.src.lastIndexOf("/") + 1, img.src.length);
 			savearray[idx++] = g_valueOfImg[filename];
 			console.log(savearray[idx - 1]);
 		});
